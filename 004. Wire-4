@@ -1,0 +1,16 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 11-08-2025
+Platform    - HDL Bits
+*/
+
+//004. Wire-4
+
+module top_module(input a,b,c, output w,x,y,z);
+    
+    assign w = a;
+    assign x = b;
+    assign y = b;
+    assign z = c;
+
+endmodule
