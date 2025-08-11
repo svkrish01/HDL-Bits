@@ -4,7 +4,7 @@ Date        - 11-08-2025
 Platform    - HDL Bits
 */
 
-//011. 7458
+//010. 7458
 
 module top_module 
     (
