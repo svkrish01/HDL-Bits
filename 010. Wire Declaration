@@ -6,7 +6,11 @@ Platform    - HDL Bits
 
 //010. Wire Declaration
 
-module top_module(input a,b,c,d, output out,out_n); 
+module top_module
+    (
+        input a, b, c, d, 
+        output out, out_n
+    ); 
 
     wire and_1, and_2;
     wire or_1;
