@@ -1,0 +1,13 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 11-08-2025
+Platform    - HDL Bits
+*/
+
+//002. Zero
+
+module top_module(output zero);
+    
+    assign zero = 1'b0;
+
+endmodule
