@@ -1,0 +1,13 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 11-08-2025
+Platform    - HDL Bits
+*/
+
+//005. Not Gate
+
+module top_module(input in, output out);
+    
+    assign out = ~(in);
+
+endmodule
