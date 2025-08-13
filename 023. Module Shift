@@ -1,0 +1,24 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 13-08-2025
+Platform    - HDL Bits
+*/
+
+//023. Module Shift
+
+module top_module 
+    ( 
+        input clk, input d, 
+        output q 
+    );
+    
+    wire clk_wire;
+    wire out_1, out_2;
+    
+    assign clk_wire = clk;
+    
+    my_dff instance_1 (.clk(clk_wire), .d(d), .q(out_1));
+    my_dff instance_2 (.clk(clk_wire), .d(out_1), .q(out_2));
+    my_dff instance_3 (.clk(clk_wire), .d(out_2), .q(q));
+
+endmodule
