@@ -21,13 +21,11 @@ module top_module
     my_dff8 instance_3 (.clk(clk), .d(out_2[7:0]), .q(out_3[7:0]));
     
     always @(*) begin
-        case(sel[1:0])
-            
+        case(sel[1:0])     
             2'b00 : q = d[7:0];
             2'b01 : q = out_1[7:0];
             2'b10 : q = out_2[7:0];
-            2'b11 : q = out_3[7:0];
-            
+            2'b11 : q = out_3[7:0];      
         endcase
     end
 
