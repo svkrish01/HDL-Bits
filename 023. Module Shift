@@ -12,13 +12,12 @@ module top_module
         output q 
     );
     
-    wire clk_wire;
     wire out_1, out_2;
     
     assign clk_wire = clk;
     
-    my_dff instance_1 (.clk(clk_wire), .d(d), .q(out_1));
-    my_dff instance_2 (.clk(clk_wire), .d(out_1), .q(out_2));
-    my_dff instance_3 (.clk(clk_wire), .d(out_2), .q(q));
+    my_dff instance_1 (.clk(clk), .d(d), .q(out_1));
+    my_dff instance_2 (.clk(clk), .d(out_1), .q(out_2));
+    my_dff instance_3 (.clk(clk), .d(out_2), .q(q));
 
 endmodule
