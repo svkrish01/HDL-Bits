@@ -1,0 +1,17 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 13-08-2025
+Platform    - HDL Bits
+*/
+
+//020. Modules
+
+module top_module 
+    ( 
+        input a, b, 
+        output out 
+    );
+    
+    mod_a instance_1(a, b, out);
+
+endmodule
