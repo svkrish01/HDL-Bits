@@ -1,0 +1,29 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 05-09-2025
+Platform    - HDL Bits
+*/
+
+//027. Module Carry Select Adder
+
+module top_module
+    (
+    	input [31:0] a, b,
+    	output [31:0] sum
+	);
+    
+    wire carry;
+    wire [15:0] carry_0, carry_1;
+    
+    add16 instance_1 (.a(a[15:0]), .b(b[15:0]), .cin(1'b0), .sum(sum[15:0]), .cout(carry));
+    add16 instance_2 (.a(a[31:16]), .b(b[31:16]), .cin(1'b0), .sum(carry_0[15:0]));
+    add16 instance_3 (.a(a[31:16]), .b(b[31:16]), .cin(1'b1), .sum(carry_1[15:0]));
+    
+    always @(*) begin
+        case(carry)
+            1'b0 : sum[31:16] = carry_0[15:0];
+            1'b1 : sum[31:16] = carry_1[15:0];
+        endcase
+    end
+
+endmodule
