@@ -1,0 +1,17 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 07-09-2025
+Platform    - HDL Bits
+*/
+
+//038. Reduction Operator
+
+module top_module 
+    (
+        input [7:0] in,
+        output parity
+    ); 
+    
+    assign parity = (^ in[7:0]);
+
+endmodule
