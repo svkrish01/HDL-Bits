@@ -1,0 +1,25 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 07-09-2025
+Platform    - HDL Bits
+*/
+
+//041. 255-Bit Population Count
+
+module top_module
+    ( 
+        input [254:0] in,
+        output [7:0] out 
+    );
+    
+    integer i;
+    
+    always @(*) begin
+        out = 0;
+        
+        for (i = 0; i < 255; i = i + 1) begin
+            out = out + in[i];
+        end
+    end
+
+endmodule
