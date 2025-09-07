@@ -22,8 +22,7 @@ module top_module
             3'b011 : out[3:0] = data3[3:0];
             3'b100 : out[3:0] = data4[3:0];
             3'b101 : out[3:0] = data5[3:0];
-            3'b110 : out[3:0] = 4'b0000;
-            3'b111 : out[3:0] = 4'b0000;
+            default : out[3:0] = 4'b0000;
         endcase
     end
 
