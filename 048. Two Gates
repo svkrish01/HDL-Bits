@@ -1,0 +1,17 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 09-09-2025
+Platform    - HDL Bits
+*/
+
+//048. Two Gates
+
+module top_module 
+    (
+        input in1, in2, in3,
+        output out
+    );
+    
+    assign out = (~(in1 ^ in2) ^ in3);
+
+endmodule
