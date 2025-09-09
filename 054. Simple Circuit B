@@ -1,0 +1,17 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 09-09-2025
+Platform    - HDL Bits
+*/
+
+//054. Simple Circuit B
+
+module top_module 
+    ( 
+        input x, y, 
+        output z 
+    );
+    
+    assign z = ~(x ^ y);
+
+endmodule
