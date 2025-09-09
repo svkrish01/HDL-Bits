@@ -1,0 +1,17 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 09-09-2025
+Platform    - HDL Bits
+*/
+
+//051. Truth Tables
+
+module top_module
+    ( 
+        input x3, x2,x1,  
+        output f   
+    );
+    
+    assign f = ((~(x3) & x2) | (x3 & x1));
+
+endmodule
