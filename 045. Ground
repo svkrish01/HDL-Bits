@@ -1,0 +1,16 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 09-09-2025
+Platform    - HDL Bits
+*/
+
+//045. Ground
+
+module top_module 
+    (
+    	output out
+    );
+
+    assign out = 1'b0;
+    
+endmodule
