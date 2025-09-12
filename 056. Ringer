@@ -1,0 +1,20 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 13-09-2025
+Platform    - HDL Bits
+*/
+
+//056. Ringer
+
+module top_module 
+    (
+        input ring,
+        input vibrate_mode,
+        output ringer,     
+        output motor         
+    );
+    
+    assign ringer = (ring & (~vibrate_mode));
+    assign motor = (ring & vibrate_mode);
+
+endmodule
