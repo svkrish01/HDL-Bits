@@ -1,0 +1,43 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 09-09-2025
+Platform    - HDL Bits
+*/
+
+//055. Combine Circuits A and B
+
+module top_module 
+    (
+        input x, y, 
+        output z
+    );
+    
+    wire out_a, out_b;
+    
+    A instance_a (.x(x), .y(y), .z(out_a));
+    B instance_b (.x(x), .y(y), .z(out_b));
+    
+    assign z = ((out_a & out_b) ^ (out_a | out_b));
+    
+endmodule
+
+
+module A
+    (
+        input x, y,
+        output z
+    );
+    
+    assign z = (x ^ y) & x;
+    
+endmodule 
+
+module B 
+    (
+        input x, y,
+        output z
+    );
+    
+    assign z = ~(x ^ y);
+   
+endmodule
