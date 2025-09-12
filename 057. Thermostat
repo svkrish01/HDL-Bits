@@ -1,0 +1,22 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 13-09-2025
+Platform    - HDL Bits
+*/
+
+//057. Thermostat
+
+module top_module 
+    (
+        input too_cold,too_hot,
+        input mode, fan_on,
+        output heater, aircon,
+        output fan
+    ); 
+    
+    assign heater = (mode & too_cold);
+    assign aircon = (~(mode) & too_hot);
+    
+    assign fan = (heater | aircon  | fan_on);
+
+endmodule
