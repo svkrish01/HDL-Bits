@@ -4,7 +4,7 @@ Date        - 13-09-2025
 Platform    - HDL Bits
 */
 
-//060. Gates and Vectors 100
+//060. Gates and Vectors - 100
 
 module top_module
     ( 
