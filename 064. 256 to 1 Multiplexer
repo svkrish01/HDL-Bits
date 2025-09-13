@@ -13,8 +13,6 @@ module top_module
         output out 
     );
     
-    always @(*) begin
-        out = in[sel[7:0]];
-    end
+    assign out = in[sel[7:0]];
 
 endmodule
