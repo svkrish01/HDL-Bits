@@ -1,0 +1,20 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 14-09-2025
+Platform    - HDL Bits
+*/
+
+//064. 256 to 1 Multiplexer
+
+module top_module
+    ( 
+        input [255:0] in,
+        input [7:0] sel,
+        output out 
+    );
+    
+    always @(*) begin
+        out = in[sel[7:0]];
+    end
+
+endmodule
