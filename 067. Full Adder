@@ -1,0 +1,18 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 14-09-2025
+Platform    - HDL Bits
+*/
+
+//067. Full Adder
+
+module top_module
+    ( 
+        input a, b, cin,
+        output cout, sum 
+    );
+    
+    assign cout = (a & b) | ((a | b) & cin);
+    assign sum = (a ^ b ^ cin);
+
+endmodule
