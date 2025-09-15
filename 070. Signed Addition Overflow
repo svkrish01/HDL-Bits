@@ -1,3 +1,11 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 15-09-2025
+Platform    - HDL Bits
+*/
+
+//070. Signed Addition Overflow
+
 module top_module 
     (
         input [7:0] a, b,
@@ -12,7 +20,7 @@ module top_module
     genvar i;
     
     generate
-        for(i = 0; i < 8; i = i + 1) begin : overflow
+        for(i = 0; i < 8; i = i + 1) begin : signed_fadd
             fadd instance_i (.a(a[i]), .b(b[i]), .cin(carry[i]), .cout(carry[i+1]), .sum(s[i]));
         end
     endgenerate
@@ -28,7 +36,7 @@ module fadd
         output cout, sum
     );
     
-    assign cout = (a 6 b ^ cin);
-    assign sum = (a & b) | ((a | b) & cin);
-    
+    assign cout = (a & b) | ((a | b) & cin);
+    assign sum = (a ^ b ^ cin);
+
 endmodule
