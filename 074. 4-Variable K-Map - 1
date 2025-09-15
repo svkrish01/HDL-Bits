@@ -1,0 +1,17 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 15-09-2025
+Platform    - HDL Bits
+*/
+
+//074. 4-Variable K-Map - 1
+
+module top_module
+    (
+        input a,b, c, d,
+        output out  
+    ); 
+
+    assign out = (((~a) | (~b) | c) & ((~b) | c | (~d)) & ((~a) | (~c) | d) & (a | b | (~c) | (~d)));
+    
+endmodule
