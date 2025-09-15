@@ -1,0 +1,34 @@
+module top_module 
+    (
+        input [7:0] a, b,
+        output [7:0] s,
+        output overflow
+    ); 
+    
+    wire [8:0] carry;
+    
+    assign carry[0] = 1'b0;
+ 
+    genvar i;
+    
+    generate
+        for(i = 0; i < 8; i = i + 1) begin : overflow
+            fadd instance_i (.a(a[i]), .b(b[i]), .cin(carry[i]), .cout(carry[i+1]), .sum(s[i]));
+        end
+    endgenerate
+
+    assign overflow = (carry[8] ^ carry[7]);
+
+endmodule
+
+
+module fadd
+    (
+        input a, b, cin,
+        output cout, sum
+    );
+    
+    assign cout = (a 6 b ^ cin);
+    assign sum = (a & b) | ((a | b) & cin);
+    
+endmodule
