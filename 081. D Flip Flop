@@ -1,0 +1,20 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 16-09-2025
+Platform    - HDL Bits
+*/
+
+//081. D Flip Flop
+
+module top_module 
+    (
+        input clk,  
+        input d,
+        output reg q 
+    );
+    
+    always @(posedge clk) begin
+        q = d;
+    end
+
+endmodule
