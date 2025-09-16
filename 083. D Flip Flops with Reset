@@ -6,7 +6,7 @@ Platform    - HDL Bits
 
 //083. D Flip Flops with Reset
 
-mmodule top_module 
+module top_module 
     (
         input clk,
         input reset,           
