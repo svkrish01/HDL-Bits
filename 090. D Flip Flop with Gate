@@ -1,0 +1,20 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//090. D Flip Flop with Gate
+
+module top_module 
+    (
+        input clk,
+        input in, 
+        output out
+    );
+    
+    always @(posedge clk) begin
+        out <= (in ^ out);
+    end
+
+endmodule
