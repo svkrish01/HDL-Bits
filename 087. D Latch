@@ -1,0 +1,22 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//087. D Latch
+
+module top_module 
+    (
+        input d, 
+        input ena,
+        output q
+    );
+    
+    always @(*) begin
+        if (ena) begin
+            q = d;
+        end
+    end
+    
+endmodule
