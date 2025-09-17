@@ -1,0 +1,26 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//095. Detect an Edge
+
+module top_module 
+    (
+        input clk,
+        input [7:0] in,
+        output [7:0] pedge
+    );
+    
+    reg [7:0] in_prev;
+    integer i;
+    
+    always @(posedge clk) begin
+        for(i = 0; i < 8; i = i+1) begin : p_edge
+            pedge[i] <= (in[i] & (~in_prev[i]));
+            in_prev[i] = in[i];
+        end
+    end
+
+endmodule
