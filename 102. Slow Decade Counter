@@ -1,0 +1,27 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//102. Slow Decade Counter
+
+module top_module 
+    (
+        input clk,
+        input slowena,
+        input reset,
+        output [3:0] q
+    );
+    
+    always@(posedge clk) begin
+        if(slowena) begin
+            q++;
+        end
+    
+        if(reset || q == 10) begin
+            q = 0;
+        end
+    end
+
+endmodule
