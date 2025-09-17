@@ -1,0 +1,33 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//086. D Flip Flops with Byte Enable
+
+module top_module 
+    (
+        input clk, resetn,
+        input [1:0] byteena,
+        input [15:0] d,
+        output [15:0] q
+    );
+    
+    always @(posedge clk) begin
+        if(resetn) begin
+            if(byteena[0]) begin
+            	q[7:0] = d[7:0];
+            end
+            
+            if(byteena[1]) begin
+                q[15:8] = d[15:8];
+            end
+        end
+        
+        else begin
+            q[15:0] = 15'b0;
+        end
+    end
+
+endmodule
