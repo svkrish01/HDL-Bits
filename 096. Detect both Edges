@@ -1,0 +1,26 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//096. Detect both Edges
+
+module top_module 
+    (
+        input clk,
+        input [7:0] in,
+        output [7:0] anyedge
+    );
+    
+    reg [7:0] in_prev;
+    integer i;    
+    
+    always @(posedge clk) begin
+        for(i = 0; i < 8; i = i+1) begin : any_edge
+            anyedge[i] = (in[i] ^ in_prev[i]);
+            in_prev[i] = in[i];
+        end
+    end
+
+endmodule
