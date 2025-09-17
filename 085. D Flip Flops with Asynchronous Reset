@@ -1,0 +1,27 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//085. D Flip Flops with Asynchronous Reset
+
+module top_module 
+    (
+        input clk, areset,   
+        input [7:0] d,
+        output [7:0] q
+    );
+    
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+        	q[7:0] = 8'b00000000;
+            
+        end
+        
+        else begin
+			q[7:0] = d[7:0];
+    	end
+    end
+
+endmodule
