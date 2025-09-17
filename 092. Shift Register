@@ -1,0 +1,30 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//092. Shift Register
+
+module top_module 
+    (
+        input clk,
+        input w, R, E, L,
+        output Q
+    );
+    
+    wire D;
+    
+    assign D = ((~E) & Q) | (E & w);
+    
+    always @(posedge clk) begin
+		if(~L) begin
+            Q = D;
+        end
+        
+        else begin
+            Q = R;
+        end
+    end            
+
+endmodule
