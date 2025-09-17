@@ -1,0 +1,28 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//098. Dual Edge Triggered Flip Flop
+
+module top_module 
+    (
+        input clk,
+        input d,
+        output q
+    );
+    
+    wire q_p, q_n;
+    
+    always @(posedge clk) begin
+        q_p = d;
+    end
+    
+    always @(negedge clk) begin
+        q_n = d;
+    end
+    
+    assign q = ((q_p & clk) | (q_n & (~clk)));
+
+endmodule
