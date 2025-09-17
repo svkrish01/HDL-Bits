@@ -1,0 +1,26 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//094. JK Flip Flop
+
+module top_module 
+    (
+        input clk,
+        input j, k,
+        output Q
+    ); 
+    
+    always @(posedge clk) begin
+        if(j ^ k) begin
+            Q = j;
+        end
+        
+        else begin
+            Q <= ((~j) & Q) | (j & (~Q));
+        end
+    end
+
+endmodule
