@@ -1,0 +1,31 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//097. Edge Capture 
+
+module top_module 
+    (
+        input clk,
+        input reset,
+        input [31:0] in,
+        output [31:0] out
+    );
+    
+    reg [31:0] in_prev;
+    integer i;
+    
+    always @(posedge clk) begin
+        for(i = 0; i < 32; i = i+1) begin : edge_capture
+            out[i] <= (in_prev[i] & (~in[i])) | out[i];
+            in_prev[i] = in[i];
+        end
+    
+        if(reset) begin
+            out <= 32'b0;
+        end
+    end
+
+endmodule
