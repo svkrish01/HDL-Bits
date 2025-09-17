@@ -16,7 +16,6 @@ module top_module
     always @(posedge clk or posedge areset) begin
         if (areset) begin
         	q[7:0] = 8'b00000000;
-            
         end
         
         else begin
