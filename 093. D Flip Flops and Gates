@@ -1,0 +1,26 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//093. D Flip Flops and Gates
+
+module top_module 
+    (
+        input clk,
+        input x,
+        output z
+    ); 
+    
+    wire out_1, out_2, out_3;
+    
+    always @(posedge clk) begin
+        out_1 <= (out_1 ^ x);
+        out_2 <= ((~out_2) & x);
+        out_3 <= ((~out_3) | x);
+    end
+    
+    assign z = ~(out_1 | out_2 | out_3);
+
+endmodule
