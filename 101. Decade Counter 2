@@ -1,0 +1,24 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-09-2025
+Platform    - HDL Bits
+*/
+
+//101. Decade Counter 2
+
+module top_module 
+    (
+        input clk,
+        input reset,
+        output [3:0] q
+    );
+    
+    always @(posedge clk) begin
+        q++;
+        
+        if(reset || q == 11) begin
+            q = 1;
+        end
+    end
+
+endmodule
