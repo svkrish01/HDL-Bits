@@ -4,7 +4,7 @@ Date        - 17-09-2025
 Platform    - HDL Bits
 */
 
-//090. D Flip Flop with Gate
+//090. D Flip Flop and Gate
 
 module top_module 
     (
