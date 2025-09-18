@@ -1,0 +1,67 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 18-09-2025
+Platform    - HDL Bits
+*/
+
+//105. 4-Digit Decimal Counter
+
+module top_module 
+    (
+        input clk,
+        input reset, 
+        output [3:1] ena,
+        output [15:0] q
+    );
+    
+    decade_counter instance_0 (.clk(clk), .reset(reset), .ena(1'b1), .q(q[3:0]));
+    decade_counter instance_1 (.clk(clk), .reset(reset), .ena(ena[1]), .q(q[7:4]));
+    decade_counter instance_2 (.clk(clk), .reset(reset), .ena(ena[2]), .q(q[11:8]));
+    decade_counter instance_3 (.clk(clk), .reset(reset), .ena(ena[3]), .q(q[15:12]));
+    
+    always @(posedge clk) begin
+        if((~reset) && (q[3:0] == 8)) begin
+            ena[1] = 1'b1;
+            
+            if(q[7:4] == 9) begin
+                ena[2] = 1'b1;
+                
+                if(q[11:8] == 9) begin
+                    ena[3] = 1'b1;
+                end
+            end
+        end
+        
+        else begin
+            ena[1] = 1'b0;
+            ena[2] = 1'b0;
+            ena[3] = 1'b0;
+        end
+    end
+
+endmodule
+        
+
+module decade_counter
+    (
+        input clk,
+        input reset, 
+        input ena,
+        output [3:0] q
+    );
+    
+    always @(posedge clk) begin
+        if(ena) begin
+            q++;
+            
+            if(q == 10) begin
+                q = 0;
+            end
+        end
+        
+        if(reset) begin
+            q = 0;
+        end
+    end
+        
+endmodule     
