@@ -4,7 +4,7 @@ Date        - 21-10-2025
 Platform    - HDL Bits
 */
 
-//108. 64-Bit Arithmetic Shift Register
+//109. 64-Bit Arithmetic Shift Register
 
 module top_module
     (
