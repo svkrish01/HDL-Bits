@@ -1,0 +1,30 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 22-10-2025
+Platform    - HDL Bits
+*/
+
+//113. Shift Register
+
+module top_module 
+    (
+        input clk,
+        input resetn, 
+        input in,
+        output out
+    );
+    
+    reg [2:0] q;
+    
+    always @(posedge clk) begin
+        if(~resetn) begin
+            q[2:0] <= 3'b0;
+            out = 1'b0;
+        end
+        
+        else begin
+            {out, q[2:0]} <= {q[2:0], in};
+        end
+    end
+
+endmodule
