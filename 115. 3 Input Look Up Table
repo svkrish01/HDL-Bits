@@ -1,0 +1,30 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 22-10-2025
+Platform    - HDL Bits
+*/
+
+//115. 3 Input Look Up Table
+
+module top_module 
+    (
+        input clk, enable,
+        input S,
+        input A, B, C,
+        output Z 
+    ); 
+    
+    reg [7:0] Q;
+    wire [2:0] LU;
+    
+    assign LU = {A, B, C};
+    
+    assign Z = Q[LU[2:0]];
+    
+    always @(posedge clk) begin
+        if(enable) begin
+            Q[7:0] <= {Q[6:0], S};
+        end
+    end
+
+endmodule
