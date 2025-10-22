@@ -1,0 +1,33 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 22-10-2025
+Platform    - HDL Bits
+*/
+
+//117. Rule 110
+
+module top_module
+    (
+        input clk,
+        input load,
+        input [511:0] data,
+        output [511:0] q
+    ); 
+    
+    wire [511:0] Left, Center, Right;
+    
+    assign Left = {1'b0, q[511:01]};
+    assign Right = {q[510:0], 1'b0};
+    assign Center = q[511:0];
+    
+    always @(posedge clk) begin
+        if(load) begin 
+            q[511:0] = data[511:0];
+        end
+        
+        else begin
+            q <= (Center ^ Right) | ((~Left) & (Center | Right));
+        end
+    end            
+
+endmodule
