@@ -1,0 +1,41 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 22-10-2025
+Platform    - HDL Bits
+*/
+
+//114. Shift Register 2
+
+module top_module 
+    (
+        input [3:0] SW,
+        input [3:0] KEY,
+        output [3:0] LEDR
+    ); 
+    
+    MUXDFF Instance_0 (.clk(KEY[0]), .w(LEDR[1]), .E(KEY[1]), .L(KEY[2]), .SW(SW[0]), .out(LEDR[0]));
+    MUXDFF Instance_1 (.clk(KEY[0]), .w(LEDR[2]), .E(KEY[1]), .L(KEY[2]), .SW(SW[1]), .out(LEDR[1]));
+    MUXDFF Instance_2 (.clk(KEY[0]), .w(LEDR[3]), .E(KEY[1]), .L(KEY[2]), .SW(SW[2]), .out(LEDR[2]));
+    MUXDFF Instance_3 (.clk(KEY[0]), .w(KEY[3]), .E(KEY[1]), .L(KEY[2]), .SW(SW[3]), .out(LEDR[3]));
+
+endmodule
+
+
+module MUXDFF 
+    (
+        input clk, w,
+        input E, L, SW,
+        output out        
+    );
+    
+    always @(posedge clk) begin
+        if(L) begin
+            out <= SW;
+        end
+        
+        else if(E) begin
+            out <= w;
+        end
+    end
+
+endmodule
