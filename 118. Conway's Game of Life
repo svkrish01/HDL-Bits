@@ -1,0 +1,86 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 22-10-2025
+Platform    - HDL Bits
+*/
+
+//118. Conway's Game of Life
+
+module top_module
+    (
+        input clk,
+        input load,
+        input [255:0] data,
+        output [255:0] q 
+    ); 
+    
+    wire [255:0] N, S, E, W, NE, NW, SE, SW;
+    genvar X, Y;
+    integer I, J, K;
+    
+    assign N = { q[239:0], q[255:240]};
+    assign S = {q[15:0], q[255:16]};
+    
+    generate
+        for(X = 0; X < 16; X += 1) begin : Loop
+            assign E[(16 * X) + 15] = q[16 * X];
+            assign E[(16 * X) + 14:(16 * X)] = q[(16 * X) + 15:(16 * X) + 1];
+                
+            assign W[16 * X] = q[(16 * X) + 15];
+            assign W[(16 * X) + 15:(16 * X) + 1]= q[(16 * X) + 14:(16 * X)];
+        end
+    endgenerate
+    
+    generate
+        for(X = 0; X < 15; X += 1) begin : Loop_1
+            for(Y = 0; Y < 15; Y += 1) begin : Loop_2
+                assign NE[(16 * (X + 1)) + Y] = q[(16 * X) + Y + 1];
+                assign NW[(16 * (X + 1)) + Y + 1] = q[(16 * X) + Y];
+                
+                assign SE[(16 * X) + Y] = q[(16 * (X + 1)) + Y + 1];
+                assign SW[(16 * X) + Y + 1] = q[(16 * (X + 1)) + Y];
+            end
+            
+            assign NE[X] = q[241 + X];
+            assign NE[(16 * (X + 1)) + 15] = q[16 * X];
+            
+            assign NW[X + 1] = q[240 + X];
+            assign NW[16 * (X + 1)] = q[(16 * X) + 15];
+            
+            assign SE[240 + X] = q[X + 1];
+            assign SE[(16 * X) + 15] = q[16 * (X + 1)];
+            
+            assign SW[241 + X] = q[X];
+            assign SW[16 * X] = q[(16 * (X + 1)) + 15];
+        end
+    endgenerate
+    
+    assign NE[15] = q[240];
+    assign NW[0] = q[255];
+    
+    assign SE[255] = q[0];
+    assign SW[240] = q[15];            
+    
+    always @(posedge clk) begin
+        if(load) begin
+            q[255:0] <= data[255:0];
+        end
+        
+        else begin
+            for(I = 0; I < 16; I += 1) begin : Loop_3
+                for(J = 0; J < 16; J += 1) begin : Loop_4
+                    K = N[(16 * I) + J] + S[(16 * I) + J] + E[(16 * I) + J] + W[(16 * I) + J] + NE[(16 * I) + J] + NW[(16 * I) + J] + SE[(16 * I) + J] + SW[(16 * I) + J];
+                    
+                    if( K < 2 || K > 3) begin
+                        q[(16 * I) + J] <= 0;
+                    end
+                    
+                    else if(K == 3) begin
+                        q[(16 * I) + J] <= 1;
+                    end
+                end
+            end       
+        end
+    end
+
+endmodule
