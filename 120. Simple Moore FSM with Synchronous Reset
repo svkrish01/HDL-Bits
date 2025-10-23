@@ -23,7 +23,7 @@ module top_module
         end
         
         else begin
-            case (present_state)
+            case(present_state)
                 1'b0 : next_state = (in == 1) ? A : B;
                 1'b1 : next_state = (in == 1) ? B : A;
             endcase
