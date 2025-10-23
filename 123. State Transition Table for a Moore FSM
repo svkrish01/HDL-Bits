@@ -14,7 +14,7 @@ module top_module
         output out
     ); 
 
-    parameter A=0, B=1, C=2, D=3;
+    parameter A = 0, B = 1, C = 2, D = 3;
 
     always @(*) begin
         case(state[1:0])
