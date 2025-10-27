@@ -1,0 +1,71 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 27-10-2025
+Platform    - HDL Bits
+*/
+
+//130. Lemmings 3
+
+module top_module
+    (
+        input clk, areset, 
+        input bump_left, bump_right,
+        input ground, dig,
+        output walk_left, walk_right,
+        output aaah, digging 
+    ); 
+    
+    parameter L = 0, R = 1, F = 2, D = 3;
+    reg [1:0] state, next_state;
+    reg prev_state;
+    
+    always @(*) begin
+        if((ground == 0) & ~(state == F)) begin
+            next_state = F;
+        end
+        
+        else if((dig == 1) & (ground == 1) & ~(state == F | state == D)) begin
+            next_state = D;
+        end
+        
+        else begin
+            case(state) 
+                L : begin
+                    next_state = (bump_left == 0) ? L : R;
+                    prev_state = L;
+                end
+                
+                R : begin
+                    next_state = (bump_right == 0) ? R : L;
+                    prev_state = R;
+                end
+                
+                F : next_state = (ground == 0) ? F : prev_state;
+                
+                D : next_state = (ground == 1) ? D : F;
+            endcase
+        end
+        
+        if(areset) begin
+            prev_state = L;
+        end
+    end
+    
+    always @(posedge clk or posedge areset) begin
+        if(areset) begin
+            if(~(state == F)) begin
+                state = L;
+            end
+        end
+        
+        else begin
+            state = next_state;
+        end
+    end
+    
+    assign walk_left = (state == L);
+    assign walk_right = (state == R);
+    assign aaah = (state == F);
+    assign digging = (state == D);
+
+endmodule
