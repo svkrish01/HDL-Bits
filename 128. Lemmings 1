@@ -1,0 +1,39 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 27-10-2025
+Platform    - HDL Bits
+*/
+
+//128. Lemmings 1
+
+module top_module
+    (
+        input clk, areset, 
+        input bump_left, bump_right,
+        output walk_left, walk_right
+    ); 
+
+    parameter L = 0, R = 1;
+    reg state, next_state;
+
+    always @(*) begin 
+        case(state)
+            L : next_state = (bump_left == 0) ? L : R;
+            R : next_state = (bump_right == 0) ? R : L;
+        endcase
+    end
+
+    always @(posedge clk or posedge areset) begin
+        if(areset) begin
+            state = L;
+        end
+        
+        else begin
+            state = next_state;
+        end
+    end
+
+    assign walk_left = (state == L);
+    assign walk_right = (state == R);
+
+endmodule
