@@ -1,0 +1,41 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 27-10-2025
+Platform    - HDL Bits
+*/
+
+//125. Simple Moore FSM with Asynchronous Reset 3
+
+module top_module
+    (
+        input clk,
+        input in,
+        input areset,
+        output out
+    ); 
+    
+    parameter A = 0, B = 1, C = 2, D = 3;
+    reg [1:0] state, next_state;
+    
+    always @(*) begin
+        case(state)
+            A : next_state = (in == 0) ? A : B;
+            B : next_state = (in == 0) ? C : B;
+            C : next_state = (in == 0) ? A : D;
+            D : next_state = (in == 0) ? C : B;
+        endcase
+    end
+
+    always @(posedge clk or posedge areset) begin
+        if(areset) begin
+            state = A;
+        end
+        
+        else begin
+            state = next_state;
+        end
+    end
+    
+    assign out = (state == D);
+
+endmodule
