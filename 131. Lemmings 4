@@ -1,0 +1,88 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 29-10-2025
+Platform    - HDL Bits
+*/
+
+//131. Lemmings 4
+
+module top_module
+    (
+        input clk, areset,
+        input bump_left, bump_right,
+        input ground, dig,
+        output walk_left, walk_right,
+        output aaah, digging 
+    ); 
+    
+    parameter L = 0, R = 1, F = 2, D = 3, S = 4;
+    reg [4:0] count;
+    reg [2:0] state, next_state;
+    reg prev_state;
+    
+    initial count = 0;
+    
+    always @(*) begin        
+        if((ground == 0) & (state != F) & (state != S)) begin
+            next_state = F;
+        end
+        
+        else if((ground == 1) & (state == L | state == R) & (dig == 1)) begin
+            next_state = D;
+        end
+        
+        else begin
+            case(state) 
+                L : begin
+                    next_state = (bump_left == 0) ? L : R;
+                    prev_state = L;
+                end
+                
+                R : begin
+                    next_state = (bump_right == 0) ? R : L;
+                    prev_state = R;
+                end
+                
+                F : next_state = (ground == 0) ? F : prev_state;
+                D : next_state = (ground == 1) ? D : F;
+                S : next_state = S;
+            endcase
+        end
+        
+        if(areset) begin
+            prev_state = L;
+        end
+    end
+    
+    always @(posedge clk or posedge areset) begin
+        if(areset) begin
+            if(state != F) begin
+                state = L;
+            end
+        end
+        
+        else begin
+            if(state != F) begin
+            	count = 0;
+       	 	end
+            
+            else if(count <= 20) begin
+                count += 1;
+            end
+
+            if((count >= 21) & (ground == 1)) begin
+                state = S;
+            end
+        	
+            else begin
+            	state = next_state;
+            end
+        end
+    end
+    
+    assign walk_left = (state == L);
+    assign walk_right = (state == R);
+    assign aaah = (state == F);
+    assign digging = (state == D);            
+
+endmodule
