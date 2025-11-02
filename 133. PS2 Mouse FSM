@@ -4,7 +4,7 @@ Date        - 01-11-2025
 Platform    - HDL Bits
 */
 
-//133. One-Hot FSM
+//133. PS2 Mouse FSM
 
 module top_module
     (
