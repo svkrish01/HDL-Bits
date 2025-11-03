@@ -1,0 +1,49 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 02-11-2025
+Platform    - HDL Bits
+*/
+
+//135. Serial Receiver FSM
+
+module top_module
+    (
+        input clk, in,
+        input reset,
+        output done
+    ); 
+    
+    parameter S0 = 0, S1 = 1, S2 = 2, S3 = 3, S4 = 4, S5 = 5;
+    parameter S6 = 6, S7 = 7, S8 = 8, S9 = 9, S10 = 10, S11 = 11;
+    reg [3:0] state, next_state;
+    
+    always @(*) begin
+        case(state)
+            S0 : next_state = (in == 0) ? S1 : S0;
+            S1 : next_state = S2;
+            S2 : next_state = S3;
+            S3 : next_state = S4;
+            S4 : next_state = S5;
+            S5 : next_state = S6;
+            S6 : next_state = S7;
+            S7 : next_state = S8;
+            S8 : next_state = S9;
+            S9 : next_state = (in == 1) ? S10 : S11;
+            S10 : next_state = (in == 0) ? S1 : S0;
+            S11 : next_state = (in == 1) ? S0 : S11;
+        endcase
+    end
+    
+    always @(posedge clk) begin
+        if(reset) begin
+            state = S0;
+        end
+    
+    	  else begin
+        	state = next_state;
+        end
+    end
+    
+    assign done = (state == S10);
+
+endmodule
