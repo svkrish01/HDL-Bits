@@ -1,0 +1,48 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 23-02-2026
+Platform    - HDL Bits
+*/
+
+//140. Serial 2's Complement - Moore FSM
+
+module top_module 
+    (
+        input clk,
+        input areset, x,
+        output z
+    ); 
+    
+    reg carry;
+    
+    initial z = 0;
+    
+    always @(posedge clk or posedge areset) begin
+        if(areset) begin
+            z = 0;
+            carry <= 1;
+        end
+        
+        else begin
+            case(x) 
+                0 : begin
+                    if(carry) begin
+                        z = 0;
+                        carry <= 1;
+                    end
+                    
+                    else begin
+                        z = 1;
+                        carry <= 0;
+                    end
+                end
+                
+                1 : begin
+                    z = carry;
+                    carry <= 0;
+                end
+            endcase
+        end
+	end           
+
+endmodule
