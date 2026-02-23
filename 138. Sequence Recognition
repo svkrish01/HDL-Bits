@@ -1,0 +1,59 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 23-02-2026
+Platform    - HDL Bits
+*/
+
+//138. Sequence Recognition
+
+module top_module
+    (
+        input clk, reset, in,
+        output disc, flag, err
+    );
+    
+    parameter S0 = 0, S1 = 1, S2 = 2, S3 = 3;
+    parameter S4 = 4, S5 = 5, S6 = 6, S7 = 7;
+    
+    reg [2:0] state, next_state;
+    
+    always @(posedge clk) begin
+        if(reset == 0) begin
+            case(state)
+                S0 : begin
+                    next_state = (in) ? S1 : S0;
+                    disc = 0;
+                    flag = 0;
+                end
+                
+                S1 : next_state = (in) ? S2 : S0;
+                S2 : next_state = (in) ? S3 : S0;
+                S3 : next_state = (in) ? S4 : S0;
+                S4 : next_state = (in) ? S5 : S0;
+                
+                S5 : begin
+                    next_state = (in) ? S6 : S0;
+                    disc = (in == 0);
+                end
+                
+                S6 : begin
+                    next_state = (in) ? S7 : S0;
+                    flag  = (in == 0);
+                end
+                
+                S7 : next_state = (in) ? S7 : S0;
+            endcase
+        end
+        
+        else begin
+			next_state = S0;
+            disc = 0;
+            flag = 0;
+        end
+        
+        state = next_state;
+    end
+    
+    assign err = (next_state == S7); 
+    
+endmodule
