@@ -1,0 +1,50 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 24-02-2026
+Platform    - HDL Bits
+*/
+
+//142. 3A - FSM
+
+module top_module 
+    (
+        input clk, reset, 
+        input s, w,
+        output z
+    );
+    
+    parameter S0 = 0, S1 = 1;
+    
+    reg state, next_state;
+    reg [2:0] mem, valid;
+    
+    initial begin
+        mem[2:0] = 3'b111;
+        valid[2:0] = 3'b100;
+    end
+    
+    always @(posedge clk) begin
+        if(reset) begin
+            next_state = S0;
+            mem[2:0] = 3'b111;
+            valid[2:0] = 3'b100;
+        end
+        
+        else begin
+            case(state)
+                S0 : next_state = (s) ? S1 : S0;
+                
+                S1 : begin
+                    mem[2:0] = {mem[1:0], w};
+                    valid[2:0] = {valid[1:0], valid[2]};
+                    next_state = S1;
+                end
+            endcase
+        end
+        
+        state = next_state;
+    end
+    
+    assign z = (state) & (valid[2]) & ((mem[2] & mem[1] & (!mem[0])) | (mem[2] & (!mem[1]) & mem[0]) | ((!mem[2]) & mem[1] & mem[0]));  
+
+endmodule
