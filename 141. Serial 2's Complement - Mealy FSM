@@ -1,0 +1,48 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 24-02-2026
+Platform    - HDL Bits
+*/
+
+//141. Serial 2's Complement - Mealy FSM
+
+module top_module 
+    (
+        input clk,
+        input areset,
+        input x,
+        output z
+    ); 
+    
+    parameter S0 = 2'b01, S1 = 2'b10;
+    
+    reg [1:0] state, next_state;
+    
+    initial begin
+        state = S0;
+        z = 0;
+    end
+    
+    always @(posedge clk or posedge areset) begin
+        if(areset) begin
+            next_state = S0;
+        end
+        
+        else begin
+            case(state)
+                S0 : begin
+                    next_state = (x) ? S1 : S0;
+                end
+                
+                S1 : begin
+                    next_state = S1;
+                end
+            endcase
+        end
+        
+        state <= next_state;
+    end   
+    
+    assign z = state[1] ^ x;
+
+endmodule
