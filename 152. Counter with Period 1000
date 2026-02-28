@@ -1,0 +1,32 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 27-02-2026
+Platform    - HDL Bits
+*/
+
+//152. Counter with Period 1000
+
+module top_module 
+    (
+        input clk,
+        input reset,
+        output [9:0] q
+    );
+    
+    always @(posedge clk) begin
+        if(reset) begin
+            q <= 10'b0;
+        end
+    
+        else begin
+            if(q < 999) begin
+                q <= q + 1;
+            end
+
+            else begin
+                q <= 10'b0;
+            end
+        end
+    end
+
+endmodule
