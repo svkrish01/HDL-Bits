@@ -1,0 +1,28 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 28-02-2026
+Platform    - HDL Bits
+*/
+
+//153. 4-Bit Shift Register
+
+module top_module 
+    (
+        input clk,
+        input shift_ena,
+        input count_ena,
+        input data,
+        output [3:0] q
+    );
+    
+    always @(posedge clk) begin
+        if(shift_ena) begin
+            q[3:0] = {q[2:0], data};
+        end
+        
+        else if(count_ena) begin
+            q[3:0] <= q[3:0] - 1;
+        end
+    end
+
+endmodule
