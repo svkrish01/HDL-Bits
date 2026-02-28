@@ -4,7 +4,7 @@ Date        - 28-02-2026
 Platform    - HDL Bits
 */
 
-//154. 4-Bit Shift Register
+//154. FSM - Sequence Recognizer
 
 module top_module 
     (
