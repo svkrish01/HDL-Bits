@@ -1,0 +1,22 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 04-03-2026
+Platform    - HDL Bits
+*/
+
+//159. Bugs in Code - Multiplexer
+
+module top_module 
+    (
+        input sel,
+        input [7:0] a,
+        input [7:0] b,
+        output [7:0] out 
+    );
+    
+    wire [7:0] sel8 = {{8{sel}}};
+    wire [7:0] sel8_in = ~sel8;
+
+    assign out[7:0] = (sel8[7:0] & a[7:0]) | (sel8_in[7:0] & b[7:0]);
+
+endmodule
