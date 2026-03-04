@@ -1,0 +1,49 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 04-03-2026
+Platform    - HDL Bits
+*/
+
+//151. 2B - FSM 3
+
+module top_module 
+    (
+        input clk,
+        input resetn,   
+        input x,
+        input y,
+        output f,
+        output g
+    ); 
+    
+    parameter A0 = 4'd0, A1 = 4'd1, B0 = 4'd2, B1 = 4'd3, B2 = 4'd4;
+    parameter C0 = 4'd5, C1 = 4'd6, D0 = 4'd7, D1 = 4'd8;
+    
+    reg [3:0] state, next_state;
+  
+    always @(posedge clk) begin
+        if(~resetn) begin
+            next_state = A0;
+        end
+        
+        else begin
+            case(state) 
+                A0 : next_state = A1;
+                A1 : next_state = B0;
+                B0 : next_state = (x) ? B1 : B0;
+                B1 : next_state = (x) ? B1 : B2;
+                B2 : next_state = (x) ? C0 : B0;
+                C0 : next_state = (y) ? D0 : C1;
+                C1 : next_state = (y) ? D0 : D1;
+                D0 : next_state = D0;
+                D1 : next_state = D1;
+            endcase
+        end
+        
+        state <= next_state;
+    end
+    
+    assign f = (state == A1);
+    assign g = (state == C0) | (state == C1) | (state == D0);
+
+endmodule
