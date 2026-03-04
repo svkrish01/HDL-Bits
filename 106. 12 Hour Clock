@@ -1,0 +1,91 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 04-03-2026
+Platform    - HDL Bits
+*/
+
+//106. 12 Hour Clock
+
+module top_module
+    (
+        input clk,
+        input reset,
+        input ena,
+        output pm,
+        output [7:0] hh,
+        output [7:0] mm,
+        output [7:0] ss
+    ); 
+    
+    wire tick_s, tick_m;
+    
+    counter_60 seconds(clk, reset, ena, ss[7:0], tick_s);
+    counter_60 minutes(tick_s, reset, ena, mm[7:0], tick_m);
+    
+    always @(posedge tick_m) begin
+        if(reset) begin
+            hh[7:0] <= 8'h12;
+            pm <= 1'b0;
+        end
+        
+        else if(ena) begin
+            if(hh[7:0] == 8'h12) begin
+                hh[7:0] <= 8'h1;
+            end
+            
+            else begin
+                if(hh[3:0] < 4'd9) begin
+                    hh[3:0] <= hh[3:0] + 1;
+                end
+                
+                else begin
+                    hh[7:0] <= 8'h10;
+                end
+            end
+            
+            if(hh[7:0] == 8'h11) begin
+                pm <= ~pm;
+            end
+        end
+    end
+    
+endmodule
+
+
+module counter_60
+    (
+        input clk,
+        input reset,
+        input ena,
+        output [7:0] counter,
+        output tick
+    );
+    
+    always @(posedge clk) begin
+        if(reset) begin
+            counter <= 8'd0;
+            tick <= 1'b1;
+        end
+        
+        else if(ena) begin
+            if(counter[3:0] < 4'd9) begin
+                counter[3:0] <= counter[3:0] + 1;
+                tick <= 1'b0;
+            end
+        
+            else begin
+                if(counter[7:4] < 4'd5) begin
+                    counter[7:4] <= counter[7:4] + 1;
+                    counter[3:0] <= 4'd0;
+                    tick <= 1'b0;
+                end
+                
+                else begin
+                    counter[7:0] <= 8'h0;
+                    tick <= 1'b1;
+                end                    
+            end
+        end
+    end
+    
+endmodule
