@@ -8,10 +8,8 @@ Platform    - HDL Bits
 
 module top_module 
     (
-        input a,
-        input b,
-        input c,
-        input d,
+        input a, b,
+        input c, d,
         output q 
     );
 
