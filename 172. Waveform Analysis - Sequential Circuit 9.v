@@ -14,7 +14,7 @@ module top_module
     );
     
     always @(posedge clk) begin
-        if (a) begin
+        if(a) begin
             q <= 4'd4;
         end
         
