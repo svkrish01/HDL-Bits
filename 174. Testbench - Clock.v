@@ -10,7 +10,7 @@ module top_module ();
     
     reg clk;
     
-    dut inst (.clk(clk));
+    dut Test (.clk(clk));
     
     initial clk = 1'b0;
     
